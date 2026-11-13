@@ -1,9 +1,7 @@
-
-
 (function () {
     'use strict';
 
-    var SVG_NS = 'http:
+    var SVG_NS = 'http://www.w3.org/2000/svg';
 
     function chevron() {
         var svg = document.createElementNS(SVG_NS, 'svg');
@@ -35,7 +33,7 @@
         button.setAttribute('aria-controls', list.id);
         button.appendChild(chevron());
 
-function setState(expanded) {
+        function setState(expanded) {
             var label = expanded ? 'Hide replies' : 'Show replies';
             list.hidden = !expanded;
             button.setAttribute('aria-expanded', expanded ? 'true' : 'false');
