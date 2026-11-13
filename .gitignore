@@ -1,0 +1,6 @@
+/vendor/
+/config/database.local.php
+.env
+*.log
+.idea/
+.vscode/

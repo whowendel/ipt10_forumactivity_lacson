@@ -1,0 +1,46 @@
+{{> header}}
+<p class="back-link"><a href="/">&larr; All discussions</a></p>
+
+<article class="card discussion">
+    <p class="post-author">
+        <img class="avatar" src="/avatar/{{author}}.svg" alt="" width="48" height="48">
+        <span>
+            <span class="author">{{author}}</span>
+            <time datetime="{{created_iso}}">{{created_label}}</time>
+        </span>
+    </p>
+    <h1>{{title}}</h1>
+    <p class="comment-body">{{body}}</p>
+</article>
+
+<section aria-labelledby="comments-heading" class="card">
+    <h2 id="comments-heading">Comments ({{comment_count}})</h2>
+
+    {{#logged_in}}
+    <form method="post" action="{{comment_action}}" class="new-comment">
+        <input type="hidden" name="csrf_token" value="{{csrf_token}}">
+        <label for="new-comment-body">Add a comment</label>
+        <textarea id="new-comment-body" name="body" rows="3" maxlength="{{max_length}}" required></textarea>
+        <button type="submit" class="btn btn-primary">Post comment</button>
+    </form>
+    {{/logged_in}}
+    {{^logged_in}}
+    <p class="notice"><a href="/login">Log in</a> or <a href="/register">register</a> to post a comment or reply.</p>
+    {{/logged_in}}
+
+    {{#truncated}}
+    <p class="notice">Some replies are not shown because this thread passed the display limit.</p>
+    {{/truncated}}
+
+    {{#has_comments}}
+    <ul class="comments">
+        {{#comments}}
+        {{> comment}}
+        {{/comments}}
+    </ul>
+    {{/has_comments}}
+    {{^has_comments}}
+    <p>No comments yet.</p>
+    {{/has_comments}}
+</section>
+{{> footer}}

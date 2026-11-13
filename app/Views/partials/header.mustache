@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{page_title}} | {{app_name}}</title>
+    <link rel="icon" href="/assets/default-avatar.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/assets/style.css">
+    <script src="/assets/replies.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+    <div class="wrap">
+        <a class="brand" href="/">{{app_name}}</a>
+        <nav aria-label="Account">
+            {{#logged_in}}
+            <span class="signed-in">
+                <img class="avatar" src="/avatar/{{current_user}}.svg" alt="" width="28" height="28">
+                <strong>{{current_user}}</strong>
+            </span>
+            <form method="post" action="/logout" class="inline-form">
+                <input type="hidden" name="csrf_token" value="{{csrf_token}}">
+                <button type="submit" class="btn btn-ghost">Log out</button>
+            </form>
+            {{/logged_in}}
+            {{^logged_in}}
+            <a class="btn btn-ghost" href="/login">Log in</a>
+            <a class="btn btn-outline" href="/register">Register</a>
+            {{/logged_in}}
+        </nav>
+    </div>
+</header>
+<main class="wrap">
+    {{#flash}}
+    <p class="flash" role="status">{{flash}}</p>
+    {{/flash}}

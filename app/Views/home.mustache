@@ -1,0 +1,19 @@
+{{> header}}
+<h1 class="page-heading">Discussions</h1>
+{{#has_discussions}}
+<ul class="discussion-list">
+    {{#discussions}}
+    <li class="card">
+        <img class="avatar" src="/avatar/{{author}}.svg" alt="" width="48" height="48">
+        <span>
+            <a href="{{url}}">{{title}}</a>
+            <span class="muted">Started by {{author}} · {{comment_count}} comments</span>
+        </span>
+    </li>
+    {{/discussions}}
+</ul>
+{{/has_discussions}}
+{{^has_discussions}}
+<p class="card">No discussions yet. Import database/schema.sql to load the sample data.</p>
+{{/has_discussions}}
+{{> footer}}

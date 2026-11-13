@@ -1,0 +1,28 @@
+{{> header}}
+<h1 class="page-heading narrow">Register</h1>
+{{#has_errors}}
+<ul class="errors narrow" role="alert">
+    {{#errors}}
+    <li>{{.}}</li>
+    {{/errors}}
+</ul>
+{{/has_errors}}
+<form method="post" action="/register" class="auth-form card">
+    <input type="hidden" name="csrf_token" value="{{csrf_token}}">
+    <label for="username">Username</label>
+    <input id="username" name="username" type="text" value="{{old_username}}" minlength="3" maxlength="30"
+           pattern="[A-Za-z0-9_]+" autocomplete="username" aria-describedby="username-help" required>
+    <p id="username-help" class="muted">3 to 30 letters, numbers or underscores.</p>
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email" value="{{old_email}}" maxlength="255" autocomplete="email" required>
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" minlength="8" maxlength="72"
+           autocomplete="new-password" aria-describedby="password-help" required>
+    <p id="password-help" class="muted">At least 8 characters.</p>
+    <label for="password_confirm">Repeat password</label>
+    <input id="password_confirm" name="password_confirm" type="password" minlength="8" maxlength="72"
+           autocomplete="new-password" required>
+    <button type="submit" class="btn btn-primary btn-block">Create account</button>
+</form>
+<p>Already registered? <a href="/login">Log in</a>.</p>
+{{> footer}}

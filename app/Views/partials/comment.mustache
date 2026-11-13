@@ -1,0 +1,37 @@
+<li class="comment" id="comment-{{id}}">
+    <article class="comment-row">
+        <img class="avatar" src="/avatar/{{author}}.svg" alt="" width="36" height="36">
+        <div class="comment-main">
+            <div class="bubble">
+                <header class="comment-meta">
+                    <span class="author">{{author}}</span>
+                    <span class="depth-label">Depth {{depth}}</span>
+                    <time datetime="{{created_iso}}">{{created_label}}</time>
+                </header>
+                <p class="comment-body">{{body}}</p>
+            </div>
+            <div class="comment-actions">
+                {{#logged_in}}
+                {{#can_be_replied}}
+                <details class="reply-box">
+                    <summary>Reply</summary>
+                    <form method="post" action="{{reply_action}}">
+                        <input type="hidden" name="csrf_token" value="{{csrf_token}}">
+                        <label for="reply-body-{{id}}">Your reply to {{author}}</label>
+                        <textarea id="reply-body-{{id}}" name="body" rows="2" maxlength="{{max_length}}" required></textarea>
+                        <button type="submit" class="btn btn-primary">Reply</button>
+                    </form>
+                </details>
+                {{/can_be_replied}}
+                {{/logged_in}}
+            </div>
+        </div>
+    </article>
+    {{#has_children}}
+    <ul class="replies{{#children_capped}} replies-capped{{/children_capped}}" id="replies-{{id}}">
+        {{#children}}
+        {{> comment}}
+        {{/children}}
+    </ul>
+    {{/has_children}}
+</li>
